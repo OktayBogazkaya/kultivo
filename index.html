@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Car Configurator</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <main>
+      <div id="configurator-controls">
+        <header>
+          <h1>Kultivo</h1>
+          <p>One Car For Every Culture.</p>
+        </header>
+        <div class="control-group">
+          <label for="image-upload">1. Base Car Image(s)</label>
+          <input type="file" id="image-upload" accept="image/*" aria-label="Upload one or more base images of a car" multiple>
+          <div id="image-preview-container"></div>
+        </div>
+        <div class="control-group">
+          <label for="country-select">2. Country Setting</label>
+          <select id="country-select" aria-label="Select a country for the car's setting">
+            <option value="">-- Select a country --</option>
+            <option value="China">China</option>
+            <option value="USA">USA</option>
+            <option value="Japan">Japan</option>
+            <option value="Germany">Germany</option>
+            <option value="Italy">Italy</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>3. Select a Theme</label>
+          <div id="theme-selector-container" class="hidden"></div>
+        </div>
+        <div class="control-group hidden" id="text-overlay-control-group">
+            <label>4. Add Text Overlay (Optional)</label>
+            <div id="text-overlay-selector-container"></div>
+        </div>
+        <div class="control-group">
+            <label for="elevenlabs-api-key">5. ElevenLabs API Key (Optional)</label>
+            <input type="password" id="elevenlabs-api-key" placeholder="Enter key to enable audio">
+            <p class="description-text">Audio generation is enabled when a valid API key is provided.</p>
+        </div>
+        <div class="button-group">
+          <button id="generate-btn" aria-label="Generate customized car image">
+            <span class="btn-text">Generate</span>
+          </button>
+          <button id="generate-variations-btn" aria-label="Generate variations of the customized car" disabled>
+            <span class="btn-text">Generate Variations</span>
+          </button>
+        </div>
+      </div>
+      <div id="image-display">
+        <div id="result-container">
+            <div id="image-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M20.4 14.5L16 10 4 20"/></svg>
+              <p>Your generated image will appear here</p>
+              <span>Upload one or more images to get started.</span>
+            </div>
+            <img id="car-image" class="hidden" alt="The customized car." />
+            <div id="loader" class="hidden" aria-hidden="true"></div>
+        </div>
+        <p id="result-text"></p>
+        <p id="error-message" role="alert"></p>
+        <div id="audio-player-container" class="hidden">
+            <h4>Thematic Audio</h4>
+            <audio controls id="thematic-audio" aria-label="Thematic audio voiceover"></audio>
+        </div>
+        <div id="variations-container" class="hidden">
+            <h2>Variations</h2>
+            <div id="variations-gallery"></div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="index.tsx"></script>
+  </body>
+</html>
